@@ -1,5 +1,5 @@
 let mongoose = require('mongoose')
-
+require('dotenv').config()
 let contactSchema = mongoose.Schema({
   name: {
     type: String,
@@ -31,7 +31,7 @@ let contactSchema = mongoose.Schema({
 })
 mongoose.pluralize(null)
 const employeeModel = mongoose.model(
-  'myemployee_test' + process.env.NODE_ENV,
+  'myemployee_' + process.env.NODE_ENV,
   contactSchema
 )
 module.exports = employeeModel

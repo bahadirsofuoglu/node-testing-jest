@@ -1,6 +1,7 @@
 const employeeModel = require('../model/employee')
 const joi = require('@hapi/joi')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 const saltRounds = 10
 const schema = joi.object({
   name: joi.string().required(),
@@ -129,11 +130,15 @@ exports.loginEmployee = async (req, res, next) => {
       return res
         .status(400)
         .send('you provided an invalid password,please try again')
-    /*   const jwtToken=await jwt.sign({
-          data:employee
-        },'secret',{expiresIn:'1h'})
-        console.log(jwtToken)
-        res.header('auth-token',jwtToken) */
+    const jwtToken = await jwt.sign(
+      {
+        data: employee
+      },
+      process.env.JWT_TOKEN_KEY,
+      { expiresIn: '1h' }
+    )
+    console.log(jwtToken)
+    res.header('auth-token', jwtToken)
     res.status(201).json(employee)
   } catch (err) {
     console.log(err)
