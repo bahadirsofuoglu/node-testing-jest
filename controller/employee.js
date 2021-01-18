@@ -71,3 +71,72 @@ exports.getEmployeeById = async (req, res, next) => {
     res.status(500).json(err)
   }
 }
+exports.updateEmployeeById = async (req, res, next) => {
+  try {
+    const updatedEmployee = await employeeModel.findByIdAndUpdate(
+      req.params.employee_id,
+      req.body,
+      {
+        userFindAndModify: false
+      }
+    )
+
+    if (updatedEmployee) {
+      res.status(201).json(updatedEmployee)
+    } else {
+      res.status(404).json(err)
+    }
+  } catch (err) {
+    console.log('in catch', err)
+    res.status(500).json(err)
+  }
+}
+exports.deleteByEmployeeId = async (req, res, next) => {
+  try {
+    const deletedEmployee = await employeeModel.findByIdAndDelete(
+      req.params.employee_id
+    )
+
+    if (deletedEmployee) {
+      res.status(201).json(deletedEmployee)
+    } else {
+      res.status(404).json(err)
+    }
+  } catch (err) {
+    console.log('in catch', err)
+    res.status(500).json(err)
+  }
+}
+exports.loginEmployee = async (req, res, next) => {
+  try {
+    const joiCheck = await schema.validate(req.body)
+    console.log('validation result', joiCheck)
+    if (joiCheck.error) return res.status(400).json(joiCheck.error)
+    const employee = await employeeModel.findOne({ email: req.body.email })
+    console.log(employee)
+    if (!employee) {
+      return res
+        .status(400)
+        .json('Email you provided already exist in our database')
+    }
+    const validatePassword = await bcrypt.compare(
+      req.body.password,
+      employee.password
+    )
+
+    console.log(validatePassword)
+    if (!validatePassword)
+      return res
+        .status(400)
+        .send('you provided an invalid password,please try again')
+    /*   const jwtToken=await jwt.sign({
+          data:employee
+        },'secret',{expiresIn:'1h'})
+        console.log(jwtToken)
+        res.header('auth-token',jwtToken) */
+    res.status(201).json(employee)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
+  }
+}
