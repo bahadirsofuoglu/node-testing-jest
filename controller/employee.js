@@ -83,7 +83,7 @@ exports.updateEmployeeById = async (req, res, next) => {
     if (updatedEmployee) {
       res.status(201).json(updatedEmployee)
     } else {
-      res.status(404).json(err)
+      res.status(400).json()
     }
   } catch (err) {
     console.log('in catch', err)
