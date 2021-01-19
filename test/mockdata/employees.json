@@ -1,0 +1,18 @@
+[
+  {
+      "_id": "60066d5b8c64800faf4afa23",
+      "name": "bahadir",
+      "email": "bahadir@gmail.com",
+      "password": "$2b$10$ZFRg.Dr.CzyRatbEQP4Vq.sS7M3AcO617q26jDSFa/VGOq01UmA2m",
+      "created_date": "2021-01-19T05:25:47.071Z",
+      "__v": 0
+  },
+  {
+      "_id": "60066d628c64800faf4afa24",
+      "name": "alex",
+      "email": "alex@gmail.com",
+      "password": "$2b$10$ELK6UlT7cXjfwXrV7YVuGOtYU2v.ZuMkObp0njZsERB1b5VbcXvaC",
+      "created_date": "2021-01-19T05:25:54.356Z",
+      "__v": 0
+  }
+]

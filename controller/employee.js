@@ -65,11 +65,11 @@ exports.getEmployeeById = async (req, res, next) => {
     if (employee) {
       res.status(200).json(employee)
     } else {
-      res.status(404).json(err)
+      res.status(404).send()
     }
   } catch (err) {
     console.log('in catch', err)
-    res.status(500).json(err)
+    res.status(500).send(err)
   }
 }
 exports.updateEmployeeById = async (req, res, next) => {
