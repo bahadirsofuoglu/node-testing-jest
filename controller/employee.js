@@ -47,14 +47,12 @@ exports.createEmployee = async (req, res, next) => {
 exports.getAllEmployees = async (req, res, next) => {
   try {
     const allEmployees = await employeeModel.find({})
-    console.log(allEmployees)
     if (allEmployees && allEmployees.length > 0) {
       res.status(200).json(allEmployees)
     } else {
-      res.status(404).json(err)
+      res.status(404).json()
     }
   } catch (err) {
-    console.log('in catch', err)
     res.status(500).json(err)
   }
 }
