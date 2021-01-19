@@ -99,11 +99,11 @@ exports.deleteByEmployeeId = async (req, res, next) => {
     if (deletedEmployee) {
       res.status(201).json(deletedEmployee)
     } else {
-      res.status(404).json(err)
+      res.status(404).json('User Not Found')
     }
   } catch (err) {
     console.log('in catch', err)
-    res.status(500).json(err)
+    res.status(500).send(err)
   }
 }
 exports.loginEmployee = async (req, res, next) => {
